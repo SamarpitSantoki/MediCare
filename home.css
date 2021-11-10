@@ -1,0 +1,22 @@
+
+.my-row{
+  text-align: center;
+  font-weight: 600;
+  font-size: 17px;
+  padding-top: 0px 1em .5em 1em;
+  /* position: absolute; */
+}
+.cart{
+  color: white;
+  position: relative;
+  display: flex;
+  padding-left: 20px;
+}
+.login{
+  color: white;
+  position: relative;
+  display: flex;
+}
+/* #my-row:after{
+  content: ;
+} */

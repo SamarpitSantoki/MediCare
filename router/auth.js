@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 require('../config/db');
 const User = require('../model/userSchema');
@@ -44,11 +45,8 @@ const redirectHome = (req,res,next) => {
 // Routes
 router.get('/', function(req,res){
     const { userId } = req.session;
-    res.send(`<h1>Welcome</h1>
-
-    ${
-        userId ? `<form method='POST' action='/logout'><button>Logout</button><a href='/home'>Home</a> </form>` : `<a href='/register'>Register</a></br><a href='/login'>Login</a>`
-    }`)
+    res.sendFile(path.join(__dirname,'../' ,'index.html'));
+    console.log(__dirname);
 });
 
 router.get('/register',redirectHome, (req,res)=>{
