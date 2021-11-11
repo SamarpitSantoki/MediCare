@@ -8,7 +8,7 @@ dotenv.config({ path:'./.env' });
 //link router file
 app.use(require('./router/auth'));
 app.use(express.static(__dirname));
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // listen to PORT
 app.listen(PORT, ()=> console.log(`http://localhost:${PORT}`));
