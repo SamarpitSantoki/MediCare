@@ -36,7 +36,7 @@ const redirectLogin = (req,res,next) => {
 // function for redirecting to home if user logged in
 const redirectHome = (req,res,next) => {
     if (req.session.userId){
-        res.redirect('/home')
+        res.redirect('/')
     }else{
         next()
     }
@@ -50,19 +50,10 @@ router.get('/', function(req,res){
 });
 
 router.get('/register',redirectHome, (req,res)=>{
-     res.send(`
-    <h1>Register</h1>
-        <form method='post' action='/register'>
-            <input name='name' placeholder='Name' required />
-            <input type='email' name='email' placeholder='Email' required />
-            <input type='password' name='password' placeholder='Password' required />
-            <input type='submit' />
-        </form>
-    <a href='/login'>Login</a>
-    `)
+    res.sendFile(path.join(__dirname,'../' ,'signup.html'));
 })
 
-router.get('/home',redirectLogin, async (req,res)=>{
+router.get('/',redirectLogin, async (req,res)=>{
     // create user and set its id element same as session userId(IT WILL HELP TO DISPLAY USER VALUE)
     // have to use await else code will run before creating user
     try{
@@ -84,15 +75,7 @@ router.get('/home',redirectLogin, async (req,res)=>{
 });
 
 router.get('/login',redirectHome, (req,res)=>{
-    res.send(`
-        <h1>Login</h1>
-        <form method='post' action='/login'>
-            <input type='email' name='email' placeholder='Email' required />
-            <input type='password' name='password' placeholder='Password' required />
-            <input type='submit' />
-        </form>
-        <a href='/register'>Register</a>
-    `)
+    res.sendFile(path.join(__dirname,'../' ,'login.html'));
 })
 
 router.post('/register', async (req,res)=>{
@@ -113,7 +96,7 @@ router.post('/register', async (req,res)=>{
            user.save().then(() => console.log("User Registered.")).catch(()=>console.log('User not created'));
            req.session.userId = user.id;
            console.log(req.session);
-           return res.redirect('/home');
+           return res.redirect('/');
        }
    }
    res.redirect('/register');
@@ -128,7 +111,7 @@ router.post('/login', async (req,res)=>{
         console.log(user);
         if (user) {
             req.session.userId = user.id;
-            return res.redirect('/home');
+            return res.redirect('/');
         }
     }res.redirect('/login');
 })
@@ -136,7 +119,7 @@ router.post('/login', async (req,res)=>{
 router.post('/logout',redirectLogin, (req,res)=>{
     req.session.destroy(err => {
         if(err){
-            res.redirect('/home');
+            res.redirect('/');
         }
         res.clearCookie(SESS_NAME)
         res.redirect('/login')
