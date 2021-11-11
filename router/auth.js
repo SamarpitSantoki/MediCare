@@ -45,7 +45,7 @@ const redirectHome = (req,res,next) => {
 // Routes
 router.get('/', function(req,res){
     const { userId } = req.session;
-    res.sendFile(path.join(__dirname,'../' ,'index.html'));
+    (userId)? res.sendFile(path.join(__dirname,'../' ,'index-logged.html')) : res.sendFile(path.join(__dirname,'../' ,'index.html'));
     console.log(__dirname);
 });
 
@@ -53,26 +53,26 @@ router.get('/register',redirectHome, (req,res)=>{
     res.sendFile(path.join(__dirname,'../' ,'signup.html'));
 })
 
-router.get('/',redirectLogin, async (req,res)=>{
-    // create user and set its id element same as session userId(IT WILL HELP TO DISPLAY USER VALUE)
-    // have to use await else code will run before creating user
-    try{
-        const user = await User.findOne({ id:req.session.userId });
+// router.get('/home',redirectLogin, async (req,res)=>{
+//     // create user and set its id element same as session userId(IT WILL HELP TO DISPLAY USER VALUE)
+//     // have to use await else code will run before creating user
+//     try{
+//         const user = await User.findOne({ id:req.session.userId });
         
-        res.send(`
-        <h1>Home</h1>  
-        <a href='/'>Main</a>
-        <ul>
-            <li> Name : ${user.name}</li>
-            <li> Email : ${user.email}</li>
+//         res.send(`
+//         <h1>Home</h1>  
+//         <a href='/'>Main</a>
+//         <ul>
+//             <li> Name : ${user.name}</li>
+//             <li> Email : ${user.email}</li>
             
-            ${req.session.userId}
-        </ul>   
-        `)
-    }catch(error){
-        console.log(error);
-    }
-});
+//             ${req.session.userId}
+//         </ul>   
+//         `)
+//     }catch(error){
+//         console.log(error);
+//     }
+// });
 
 router.get('/login',redirectHome, (req,res)=>{
     res.sendFile(path.join(__dirname,'../' ,'login.html'));
