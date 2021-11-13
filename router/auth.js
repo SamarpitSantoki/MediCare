@@ -42,15 +42,24 @@ const redirectHome = (req,res,next) => {
     }
 }
 
+// app.use(async (req, res , next) => {
+//     const { userId } = req.session;
+//     if(userId) {
+//         res.locals.userid = await User.findOne({id:userId});
+//     }
+//     next();
+// })
+
 // Routes
 router.get('/', function(req,res){
-    const { userId } = req.session;
-    (userId)? res.sendFile(path.join(__dirname,'../' ,'index-logged.html')) : res.sendFile(path.join(__dirname,'../' ,'index.html'));
-    console.log(__dirname);
+    const userId =  req.session.userId;
+    res.render('home',{
+        user : userId,
+    })
 });
 
-router.get('/register',redirectHome, (req,res)=>{
-    res.sendFile(path.join(__dirname,'../' ,'signup.html'));
+router.get('/signup',redirectHome, (req,res)=>{
+    res.render('signup');
 })
 
 // router.get('/home',redirectLogin, async (req,res)=>{
@@ -75,10 +84,10 @@ router.get('/register',redirectHome, (req,res)=>{
 // });
 
 router.get('/login',redirectHome, (req,res)=>{
-    res.sendFile(path.join(__dirname,'../' ,'login.html'));
+    res.render('login');
 })
 
-router.post('/register', async (req,res)=>{
+router.post('/signup', async (req,res)=>{
    let active_ids = await User.countDocuments({}) + 1;
    const { name, email , password } = req.body;
    //check all fields are filled
@@ -99,7 +108,7 @@ router.post('/register', async (req,res)=>{
            return res.redirect('/');
        }
    }
-   res.redirect('/register');
+   res.redirect('/signup');
 })
 
 router.post('/login', async (req,res)=>{
