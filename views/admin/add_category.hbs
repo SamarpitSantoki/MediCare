@@ -1,0 +1,25 @@
+<html>
+<header>
+    {{>header}}
+</header>
+
+<body>
+    {{>Anav}}
+
+    <div class="container my-auto">
+        <h2 class="page-title">Add a new Category</h2>
+        <a href="/admin/category" class="btn btn-primary">Back to Categories</a>
+        <br><br>
+
+        <form action="/admin/category/add" method="post">
+            <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" required name="title" class="form-control" value="{{title}}" placeholder="Title">
+            </div>
+
+            <button class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

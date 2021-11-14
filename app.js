@@ -1,9 +1,11 @@
 const dotenv = require('dotenv');
 const express = require ('express');
-const mongoose = require('mongoose');
-const app = express();
-const hbs = require('hbs');
 const path = require('path');
+const hbs = require('hbs');
+
+//initiallize the app 
+const app = express();
+
 dotenv.config({ path:'./.env' });
 const PORT = parseInt(process.env.PORT) || 3000;
 
@@ -14,10 +16,13 @@ app.set('views', __dirname + '/views');
 hbs.registerPartials(path.join(__dirname, "./views/partials"));
 app.use(express.static(__dirname + '/public'));
 
+//link database
+require('./config/db');
 
-//link router file
-app.use(require('./router/auth'));
-app.use(express.static(__dirname));
+
+//link routes file
+app.use('/admin', require('./routes/admin'))
+app.use('/', require('./routes/auth'));
 
 // listen to PORT
 app.listen(PORT, ()=> console.log(`http://localhost:${PORT}`));

@@ -4,10 +4,9 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-require('../config/db');
 const User = require('../model/userSchema');
 
-const SESS_SECRET = process.env.SESS_secret; //will run when page is loaded first time
+const SESS_SECRET = process.env.SESS_secret;
 const SESS_NAME = process.env.SESS_name;
 
 router.use(bodyParser.urlencoded({
@@ -42,14 +41,6 @@ const redirectHome = (req,res,next) => {
     }
 }
 
-// app.use(async (req, res , next) => {
-//     const { userId } = req.session;
-//     if(userId) {
-//         res.locals.userid = await User.findOne({id:userId});
-//     }
-//     next();
-// })
-
 // Routes
 router.get('/', function(req,res){
     const userId =  req.session.userId;
@@ -61,27 +52,6 @@ router.get('/', function(req,res){
 router.get('/signup',redirectHome, (req,res)=>{
     res.render('signup');
 })
-
-// router.get('/home',redirectLogin, async (req,res)=>{
-//     // create user and set its id element same as session userId(IT WILL HELP TO DISPLAY USER VALUE)
-//     // have to use await else code will run before creating user
-//     try{
-//         const user = await User.findOne({ id:req.session.userId });
-        
-//         res.send(`
-//         <h1>Home</h1>  
-//         <a href='/'>Main</a>
-//         <ul>
-//             <li> Name : ${user.name}</li>
-//             <li> Email : ${user.email}</li>
-            
-//             ${req.session.userId}
-//         </ul>   
-//         `)
-//     }catch(error){
-//         console.log(error);
-//     }
-// });
 
 router.get('/login',redirectHome, (req,res)=>{
     res.render('login');
@@ -102,7 +72,7 @@ router.post('/signup', async (req,res)=>{
                password
            });
            
-           user.save().then(() => console.log("User Registered.")).catch(()=>console.log('User not created'));
+           user.save().then(() => console.log("User Registered.")).catch(()=>res.redirect('/signup'));
            req.session.userId = user.id;
            console.log(req.session);
            return res.redirect('/');
