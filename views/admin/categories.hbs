@@ -1,27 +1,34 @@
-{{>header}}
-{{>Anav}}
+<html>
 
+<head>
+    {{>Aheader}}
+</head>
 
-<h2 class="page-title">Category</h2>
-<a href="/admin/category/add" class="btn btn-primary">Add a new Category</a>
-<br><br>
+<body>
+    {{>Anav}}
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each cats as |cat|}}
+    <h2 class="page-title">Category</h2>
+    <a href="/admin/category/add" class="btn btn-primary">Add a new Category</a>
+    <br><br>
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-            <td>{{cat.title}}</td>
-            <td><a href="/admin/category/edit/{{cat.slug}}">Edit</a></td>
-            <td><a class="link-danger" href="/admin/category/delete/{{cat._id}}">Delete</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
+                <th>Category</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each cats as |cat|}}
+            <tr>
+                <td>{{cat.title}}</td>
+                <td><a href="/admin/category/edit/{{cat._id}}">Edit</a></td>
+                <td><a class="link-danger" href="/admin/category/delete/{{cat._id}}">Delete</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
 
-</table>
+</html>
