@@ -3,6 +3,7 @@ const router = express.Router();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 
 const User = require('../model/userSchema');
 
@@ -57,15 +58,21 @@ router.post('/signup', async (req,res)=>{
    if(name && email && password){
        // to check if user already exists
        const exists = User.findOne({email:email});
-       if(exists){  
+       if(!exists){  
            const user = new User({
                id : active_ids++,
                name,
                email,
                password
            });
-           
-           user.save().then(() => console.log("User Registered.")).catch(()=>res.redirect('/signup'));
+
+        //    bcrypt.genSalt(10, (err,salt)=>{
+        //     bcrypt.hash(user.password, salt,(err,hash)=>{
+        //         if(err){console.log(err);}
+        //         user.password= hash;
+//     });
+//    });
+                user.save().then(() => console.log("User Registered.")).catch(()=>res.redirect('/signup'));
            req.session.userId = user.id;
            console.log(req.session);
            return res.redirect('/');
@@ -79,6 +86,12 @@ router.post('/login', async (req,res)=>{
 
     if(email && password ) {
         // authentication
+        // bcrypt.genSalt(10, (err,salt)=>{
+        //     bcrypt.hash(password, salt,(err,hash)=>{
+        //         if(err){console.log(err);}
+        //         user.password= hash;
+        //     });});
+
         const user = await User.findOne({ email:email,password:password });
         if (user) {
             req.session.userId = user.id;

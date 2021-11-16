@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    {{>nav}}
+
+    <div class="container d-flex flex-column justify-content-center">
+        <div class="row row-cols-3 row-cols-md-6 g-4 mb-4">
+            {{#if cart}}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+                        <th>SubTotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each cart as | prod |}}
+                    <tr>
+                        <td><img src="{{prod.image}}" alt=""></td>
+                        <td>{{prod.title}}</td>
+                        <td>{{prod.price}}</td>
+                        <td>{{prod.qty}}</td>
+                        <td>
+                            <a href="/cart/update/{{prod.title}}?action=add">+</a>&nbsp;
+                            <a href="/cart/update/{{prod.title}}?action=remove">-</a>&nbsp;
+                            <a href="/cart/update/{{prod.title}}?action=clear">clear</a>&nbsp;
+                        </td>
+                        <td>${{prod.total}}</td>
+                    </tr>
+                    {{/each}}
+
+                    <tr>
+                        <td colspan="6" align="right"><b>Total</b>{{total}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="right">
+                                <a class="clearcart btn btn-danger" href="/cart/clear"></a>
+                        </td>
+                        <td colspan="6" align="right">
+                                <a class="btn btn-primary buynow" href="#"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {{/if}}
+
+        </div>
+        {{>footer}}
+        <script>
+
+            $('a.clearcar').on('click',()=>{
+                if(!confirm('Confirm ClearCart'))
+                return false;
+            });
+
+
+
+        </script>
+</body>
+
+</html>

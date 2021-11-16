@@ -7,6 +7,8 @@ const path = require('path');
 const SESS_SECRET = process.env.SESS_secret;
 const SESS_NAME = process.env.SESS_name;
 
+const Product = require('../model/productSchema');
+
 router.use(session({
     name : SESS_NAME,
     resave : false,
@@ -24,9 +26,12 @@ router.use(bodyParser.urlencoded({
 
 router.get('/', function(req,res){
     const userId =  req.session.userId;
-    res.render('home',{
-        user : userId,
-    })
+    Product.find((err,products)=>{
+        res.render('home',{
+            user: userId,
+            products : products
+        });
+    });
 });
 
 router.get('/babycare', function(req,res){
@@ -36,21 +41,27 @@ router.get('/babycare', function(req,res){
     })
 });
 
-router.get('/', function(req,res){
+router.get('/covidcare', function(req,res){
     const userId =  req.session.userId;
-    res.render('home',{
+    res.render('covidcare',{
         user : userId,
     })
 });
 
-router.get('/', function(req,res){
+router.get('/devices', function(req,res){
     const userId =  req.session.userId;
-    res.render('home',{
+    res.render('devices',{
         user : userId,
     })
 });
 
-router.get('/', function(req,res){
+router.get('/healthcare', function(req,res){
+    const userId =  req.session.userId;
+    res.render('healthcare',{
+        user : userId,
+    })
+});
+router.get('/medicines', function(req,res){
     const userId =  req.session.userId;
     res.render('home',{
         user : userId,

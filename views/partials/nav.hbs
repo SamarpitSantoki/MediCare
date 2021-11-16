@@ -3,10 +3,10 @@
   <nav class="navbar navbar-imp navbar-expand-lg navbar-dark pb-0 sticky-top" style="background-color: #10847e; box-shadow: none;">
     <div class="container-fluid mx-5">
       <a class="navbar-brand mb-0 h1" href="/">
-        <img src="./images/Untitled-2.1 (1).jpg" width="175" height="50" class="d-inline-block align-text-top">
+        <img src="/images/Untitled-2.1 (1).jpg" width="175" height="50" class="d-inline-block align-text-top">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" style="color: aliceblue; background-color: 00a59c !important;">
-        <span class="navbar-toggler-icon" style="z-index: 100; background-image: url('././images/download.svg');"></span>
+        <span class="navbar-toggler-icon" style="z-index: 100; background-image: url('/images/download.svg');"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-lg-between w-100 " id="navbarTogglerDemo02">  
         <div class="navbar-nav col-lg-7">
@@ -19,18 +19,24 @@
         </div>
         <div class="navbar-nav d-flex">
           <div class="cart m-auto link-light">
-            <img src="./images/21b0b5ba.svg" width="30px" height="25px" alt="">
-            <span>Cart</span>
+            <a href="/cart">
+              <img src="/images/21b0b5ba.svg" width="30px" height="25px" alt="">
+              <span class="text-light">Cart
+                {{#if cart}}
+                {{cart.length}}{{else}}0
+                {{/if}}
+              </span>
+            </a>
           </div>
           <div class="login m-auto" id="login">
             <a href="/login" class="link-light">
-              <img src="./images/5eb42971.svg" width="26px" height="25px" alt="">
-              <span class="text-light"><a class="link-light" href="/login">Login</a>/<a class="link-light" href="/signup">SignUp</a></span>
+              <img src="/images/5eb42971.svg"  width="26px" height="25px" alt="">
+              <span class="text-light" ><a class="link-light" href="/login">Login/</a><a class="link-light" href="/signup">SignUp</a></span>
             </a>
           </div>  
           <div class="justify-content-center d-none" id="logout">
             <form action="/logout" class="d-flex align-items-center my-auto"  method="post">
-              <img src="./images/5eb42971.svg" width="26px" height="25px" alt="">
+              <img src="/images/5eb42971.svg" width="26px" height="25px" alt="">
               <button class="btn-outline-light btn" type="submit">Logout</button>
             </form>
           </div>
@@ -65,7 +71,7 @@
       </div>
       <div class="col" id="my-row">
         <li class="nav-item">
-          <a class="nav-link text-white"  href="babycare">Baby Care</a>
+          <a class="nav-link text-white"  href="/babycare">Baby Care</a>
         </li>
       </div>
     </ul>
