@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    {{>Aheader}}
+</head>
+
+<body>
+    {{>Anav}}
+
+    <h2 class="page-title">Products</h2>
+    <a href="/admin/product/add" class="btn btn-primary">Add a new Product</a>
+    <br><br>
+
+    {{#if pcount}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Proce</th>
+                <th>Category</th>
+                <th>Product Image</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each prods as |prod|}}
+            <tr>
+                <td>{{prod.title}}</td>
+                <td>{{ prod.price }}</td>
+                <td>{{prod.category}}</td>
+                <td>
+                    {{#if prod.image}}
+                    <img src="/images/noimage.png">
+                    {{else}}
+                    <img src="/product_image/{{prod._id}}/{{prod.image}}">
+                    {{/if}}
+
+                </td>
+                <td><a href="/admin/product/edit/{{prod._id}}">Edit</a></td>
+                <td><a class="link-danger" href="/admin/product/delete/{{prod._id}}">Delete</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <h3 class="text-center">No Products</h3>
+    {{/if}}
+</body>
+
+</html>

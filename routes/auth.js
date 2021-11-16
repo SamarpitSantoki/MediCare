@@ -42,13 +42,6 @@ const redirectHome = (req,res,next) => {
 }
 
 // Routes
-router.get('/', function(req,res){
-    const userId =  req.session.userId;
-    res.render('home',{
-        user : userId,
-    })
-});
-
 router.get('/signup',redirectHome, (req,res)=>{
     res.render('signup');
 })
@@ -87,7 +80,6 @@ router.post('/login', async (req,res)=>{
     if(email && password ) {
         // authentication
         const user = await User.findOne({ email:email,password:password });
-        console.log(user);
         if (user) {
             req.session.userId = user.id;
             return res.redirect('/');
