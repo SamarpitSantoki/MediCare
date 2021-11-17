@@ -19,168 +19,22 @@
     <!-- heading -->
     <h2>Heath Care</h2>
 
-    <!-- starting of cards -->
     <div class="row row-cols-3 row-cols-md-4 g-4">
+        {{#each products as |prod|}}
         <div class="col">
             <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/I06462/dr-ortho-an-ayurvedic-medicine-oil-bottle-of-120-ml-1-1632775254.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Dr Ortho Ayurvedic Medicine Oil Bottle Of 120 Ml</h5>
+                <img src="/product_images/{{prod._id}}/{{prod.image}}" class="card-img-top" alt="..." />
+                <div class="card-body d-flex flex-column justify-content-lg-between">
+                    <h5 class="card-title">{{prod.title}}</h5>
                     <p class="card-text">
-
+                        ₹{{prod.price}}
                     </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
+                    <a href="/cart/add/{{prod.slug}}" class="btn btn-primary ">Add to cart </a>
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/081970/garlic-pearls-healthy-heart-digestion-capsules-bottle-of-100-1-1632774754.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Garlic Pearls Healthy Heart Bottle - 100 pearls</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/I01462/seacod-110-cod-liver-oil-capsules-bottle-of-110-1-1632774260.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Everherb Tulsi -Fights Against Infection- Bottle Of 60</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/N97106/everherb-tulsi-immunity-booster-capsules-fights-against-infection-bottle-of-60-2-1632777535.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Depura,helps Bones Healthy, Aids In Boosting Immunity</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/F75808/kapiva-vegan-protein-chocolate-post-workout-recovery-100-plant-based-nutrition-1-kg-29-servings-2-1632783091.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Kapiva Vegan Protein - Chocolate Based Nutrition 1 Kg</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/F22184/ourdaily-vitamin-c-500mg-zinc-chewable-tablets-builds-immunity-against-viruses-and-cold-lemony-orange-flavour-15-tablets-2-1632779046.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Ourdaily Vitamin C Orange Flavour-15 Tablets</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/O31911/everherb-ashwagandha-immunity-booster-capsules-anxiety-stress-relief-bottle-of-60-6.1-1632777393.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Everherb Ashwagandha Anxiety-Bottle Of 60</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/276478/baidyanath-mahatriphala-ghrita-bottle-of-100-g-2-1632774946.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top" class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Baidyanath Mahatriphala Ghrita Bottle Of 100 G</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/060754/dr-morepen-bg-03-glucometer-kit-with-free-25-strips-1-1632775169.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Dr Morepen 03 Glucometer Kit (with Free 25 Strips)</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/W83090/zandu-amla-5-herbs-health-juice-500-ml-1-1632779978.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">Zandu Amla + 5 Herbs Health Juice - 500 Ml</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/131677/one-touch-select-glucometer-test-strips-bottle-of-25-2-1632775277.jpg?dim=240x0&dpr=1.5&q=100"
-                    class="card-img-top p-4" alt="..." />
-                <div class="card-body h-100">
-                    <h5 class="card-title">One Touch Select Glucometer Test Strips Bottle Of 20</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://cdn01.pharmeasy.in/dam/products_otc/S24468/hamdard-arq-gulab-pure-rose-water-100ml-1-1632782028.jpg?dim=240x0&dpr=1.5&q=100"
-                    alt="..." />
-                &nbsp;
-                <div class="card-body h-100">
-                    <h5 class="card-title">Hamdard Arq Gulab - Pure Rose Water - 100ml</h5>
-                    <p class="card-text">
-
-                    </p>
-                    <a href="#" class="btn btn-primary">Add To Cart</a>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
-
-    <!-- ending of cards -->
 
 
 

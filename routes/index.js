@@ -10,13 +10,13 @@ const SESS_NAME = process.env.SESS_name;
 const Product = require('../model/productSchema');
 
 router.use(session({
-    name : SESS_NAME,
-    resave : false,
-    saveUninitialized : false,
-    secret : SESS_SECRET,
-    cookie :{
-        maxAge : 1000*60*60,
-        sameSite : true,
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESS_SECRET,
+    cookie: {
+        maxAge: 1000 * 60 * 60,
+        sameSite: true,
     }
 }))
 
@@ -24,48 +24,61 @@ router.use(bodyParser.urlencoded({
     extended: true,
 }))
 
-router.get('/', function(req,res){
-    const userId =  req.session.userId;
-    Product.find((err,products)=>{
-        res.render('home',{
+router.get('/', function (req, res) {
+    const userId = req.session.userId;
+    Product.find((err, products) => {
+        res.render('home', {
             user: userId,
-            products : products
+            products: products
         });
     });
 });
 
-router.get('/babycare', function(req,res){
-    const userId =  req.session.userId;
-    res.render('babycare',{
-        user : userId,
-    })
+router.get('/babycare', function (req, res) {
+    const userId = req.session.userId;
+    Product.find({ category: "baby-care" }, (err, products) => {
+        res.render('babycare', {
+            user: userId,
+            products: products
+        });
+    });
 });
+router.get('/covidcare', function (req, res) {
+    const userId = req.session.userId;
+    Product.find({ category: "covid-care" }, (err, products) => {
+        res.render('covidcare', {
+            user: userId,
+            products: products
+        });
+    });
+});
+router.get('/devices', function (req, res) {
+    const userId = req.session.userId;
+    Product.find({ category: "devices" }, (err, products) => {
+        res.render('devices', {
+            user: userId,
+            products: products
+        });
+    });
+});
+router.get('/healthcare', function (req, res) {
+    const userId = req.session.userId;
+    Product.find({ category: "healthcare" }, (err, products) => {
+        res.render('healthcare', {
+            user: userId,
+            products: products
+        });
+    });
+});
+router.get('/medicines', function (req, res) {
+    const userId = req.session.userId;
 
-router.get('/covidcare', function(req,res){
-    const userId =  req.session.userId;
-    res.render('covidcare',{
-        user : userId,
-    })
-});
-
-router.get('/devices', function(req,res){
-    const userId =  req.session.userId;
-    res.render('devices',{
-        user : userId,
-    })
-});
-
-router.get('/healthcare', function(req,res){
-    const userId =  req.session.userId;
-    res.render('healthcare',{
-        user : userId,
-    })
-});
-router.get('/medicines', function(req,res){
-    const userId =  req.session.userId;
-    res.render('home',{
-        user : userId,
-    })
+    Product.find({ category: "medicine" }, (err, products) => {
+        res.render('medicines', {
+            user: userId,
+            products: products
+        });
+    });
 });
 
 module.exports = router;

@@ -163,7 +163,6 @@ router.post("/edit/:id", async (req, res) => {
             }
         });
 
-
         if (imageFile != "") {
             if (nimage != "") {
                 await fs.remove("public/product_images/" + id +"/"+ nimage, (err) => {

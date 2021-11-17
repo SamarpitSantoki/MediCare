@@ -5,17 +5,19 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const Product = require('../model/productSchema');
+const Order = require('../model/orderSchema');
+const User = require("../model/userSchema");
 const SESS_SECRET = process.env.SESS_secret;
 const SESS_NAME = process.env.SESS_name;
 
 router.use(session({
-    name : SESS_NAME,
-    resave : false,
-    saveUninitialized : false,
-    secret : SESS_SECRET,
-    cookie :{
-        maxAge : 1000*60*60,
-        sameSite : true,
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESS_SECRET,
+    cookie: {
+        maxAge: 1000 * 60 * 60,
+        sameSite: true,
     }
 }))
 router.use(bodyParser.urlencoded({
@@ -85,24 +87,24 @@ router.get("/add/:product", (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
+router.get('/', redirectLogin, (req, res) => {
 
     var total = 0;
     var cart = req.session.cart;
     for (var i = 0; i < cart.length; i++) {
         total += parseInt(cart[i].total);
     }
-    if(cart && cart.length==0){
+    if (cart && cart.length == 0) {
         delete req.session.cart;
         res.redirect('/cart/checkout');
     } else {
-    res.render('cart', {
-        title: 'Checkout',
-        cart: cart,
-        total: total,
-        user: req.session.userId
-    });
-}
+        res.render('cart', {
+            title: 'Checkout',
+            cart: cart,
+            total: total,
+            user: req.session.userId
+        });
+    }
 });
 
 router.get('/update/:product', (req, res) => {
@@ -138,7 +140,41 @@ router.get('/update/:product', (req, res) => {
     res.redirect('back');
 });
 
-router.get('/clear',(req,res)=>{
+router.get('/order', (req, res) => {
+
+    var cart = req.session.cart;
+    var id = req.session.userId;
+    var total = 0;
+    for (var i = 0; i < cart.length; i++) {
+        total += parseInt(cart[i].total);
+    }
+    User.findOne({ id: id }, async (err, user) => {
+        if (err) { console.log('Oreder not Placed'); }
+
+        const order = new Order({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            orderArray: cart
+        });
+        await order
+            .save()
+            .then(() => console.log("Order Added."))
+            .catch(() => {
+                console.log("Order not Added");
+            });
+        res.render("ordersummary"), {
+            user: user.name,
+            total: total,
+            cart: cart
+        };
+    });
+
+});
+
+
+
+router.get('/clear', (req, res) => {
 
     delete req.session.cart;
     res.redirect('/cart/checkout');

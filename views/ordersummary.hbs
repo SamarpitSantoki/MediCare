@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    {{>header}}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .breadcrumb {
+            margin-top: 30px;
+            height: auto;
+        }
+
+        #fline {
+            max-width: 1024px;
+            margin: 0 auto;
+            min-height: 4vh;
+            margin-top: 15px;
+        }
+
+        .breadcrumb-item {
+            text-transform: capitalize;
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            color: #4f585e;
+            padding: 0;
+        }
+
+        .breadcrumb-item a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .container-fluid .nav .nav-link {
+            color: #ffffff;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .container-fluid .nav .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .container-fluid .nav .nav-link::after {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            background-color: #ffffff;
+            color: transparent;
+            width: 0%;
+            content: '.';
+            height: 3px;
+            position: absolute;
+        }
+
+        .container-fluid .nav .nav-link:hover::after {
+            width: 30%;
+        }
+
+        .container-fluid .nav .nav-link:hover::after {
+            transition: all 0.5s;
+        }
+
+
+        h2 {
+            min-height: 3 vh;
+            margin: 0 auto;
+            color: #495055;
+            max-width: 1024px;
+        }
+
+        .row {
+            max-width: 1024px;
+            min-height: 3 vh;
+            margin: 0 auto;
+        }
+
+        .container {
+            margin-bottom: 65px;
+            max-width: 75vw;
+        }
+
+        .h3,
+        .apdu {
+            margin: 0px auto;
+            min-height: 3vh;
+            max-width: 1024px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        h4 {
+            font-size: 27px;
+            padding-top: 5px;
+        }
+
+        .input {
+            margin-left: 10px;
+        }
+
+        .label {
+            padding: 5px;
+
+        }
+
+        .combined {
+            border-radius: 7px;
+            /* border:2px solid black; */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 70px;
+        }
+
+        .dablu {
+            padding: 2px 16px;
+        }
+
+        .apdu {
+            display: flex;
+            flex-direction: row;
+            height: 250px;
+            border-radius: 7px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    {{>nav}}
+    <div class="container">
+        <div class="d-flex justify-content-around">
+            <p class="h3">Order Summary</p>
+        </div>
+        <div class="sec1">
+        <div class="apdu">
+            {{#each cart as | prod |}}
+                <img src="{{prod.image}}" alt="Avatar">
+                <div class="dablu  d-flex flex-column justify-content-center">
+                    <h4><b>{{prod.title}}</b></h4>
+                    <p><b>Price: {{prod.price}}</b></p>
+                    <div class="combined">
+                         <form action="/action_page.php">
+                        <div class="label">
+                            <label for="quantity">Quantity</label>
+                            <p>{{prod.qty}}</p>
+                        </div>
+                        <div class="subtotal">
+                            <h5><b>Subtotal: {{prod.total}}</b></h5>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        </div>
+    </div>
+    {{>footer}}
+</body>
+
+</html>
