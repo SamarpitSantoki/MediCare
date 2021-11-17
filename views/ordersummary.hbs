@@ -140,9 +140,9 @@
             <p class="h3">Order Summary</p>
         </div>
         <div class="sec1">
-        <div class="apdu">
             {{#each cart as | prod |}}
-                <img src="{{prod.image}}" alt="Avatar">
+        <div class="apdu">
+                <img class="p-4" src="{{prod.image}}" alt="Avatar">
                 <div class="dablu  d-flex flex-column justify-content-center">
                     <h4><b>{{prod.title}}</b></h4>
                     <p><b>Price: {{prod.price}}</b></p>
@@ -158,8 +158,8 @@
                     </form>
                     </div>
                 </div>
-            {{/each}}
         </div>
+            {{/each}}
         </div>
     </div>
     {{>footer}}
