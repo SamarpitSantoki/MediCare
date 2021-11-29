@@ -38,9 +38,7 @@ const redirectHome = (req,res,next) => {
     }
 }
 
-router.get("/", (req, res) => {
-  res.render('admin');
-});
+router.get('/', require('./admin/order'));
 
 router.use('/category', require('./admin/category'));
 

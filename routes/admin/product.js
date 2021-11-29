@@ -127,8 +127,8 @@ router.get("/edit/:id", (req, res) => {
     });
 });
 
-router.post("/edit/:id", async (req, res) => {
-    console.log(req.body, req.files);
+router.post("/edit/:id", (req, res) => {
+
     var imageFile =  (req.files !== null) ? req.files.image.name : "";
     var title = req.body.title;
     var slug = title.replace(/\s+/g, "-").toLowerCase();
@@ -139,7 +139,7 @@ router.post("/edit/:id", async (req, res) => {
     var id = req.params.id;
 
     if (slug) {
-         Product.findById(id, (err, prod) => {
+         Product.findById(id, async (err, prod) => {
             if (err) { console.log(err); }
             else {
                 if (prod) {
@@ -161,19 +161,19 @@ router.post("/edit/:id", async (req, res) => {
                         });
                 }
             }
-        });
-
-        if (imageFile != "") {
-            if (nimage != "") {
-                await fs.remove("public/product_images/" + id +"/"+ nimage, (err) => {
-                    if (err) console.log(err);
-                });
+            
+            if (imageFile != "") {
+                if (nimage != "") {
+                    await fs.remove("public/product_images/" + id +"/"+ nimage, (err) => {
+                        if (err) console.log(err);
+                    });
+                }
+                
+                var productImage = req.files.image;
+                var path = "public/product_images/" + id + "/" + imageFile;
+                productImage.mv(path);
             }
-
-            var productImage = req.files.image;
-            var path = "public/product_images/" + id + "/" + imageFile;
-            productImage.mv(path);
-        }
+        });
 
         return res.redirect("/admin/product/");
     };

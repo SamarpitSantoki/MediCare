@@ -46,9 +46,8 @@ router.get("/add/:product", (req, res) => {
     const slug = req.params.product;
 
     Product.findOne({ slug: slug }, (err, p) => {
-        if (err) {
-            console.log(err);
-        }
+        if (err) { console.log(err); }
+
         if (typeof req.session.cart == "undefined") {
             req.session.cart = [];
             req.session.cart.push({
@@ -64,7 +63,7 @@ router.get("/add/:product", (req, res) => {
             var newItem = true;
 
             for (var i = 0; i < cart.length; i++) {
-                if (cart[i].title === slug) {
+                if (cart[i].title === p.title) {
                     cart[i].qty++;
                     cart[i].total = cart[i].price * cart[i].qty;
                     newItem = false;
@@ -74,7 +73,8 @@ router.get("/add/:product", (req, res) => {
 
             if (newItem) {
                 cart.push({
-                    title: slug,
+                    title: p.title,
+                    slug: p.slug,
                     qty: 1,
                     price: parseInt(p.price),
                     total: parseInt(p.price),
@@ -155,7 +155,9 @@ router.get('/order', (req, res) => {
             id: user.id,
             name: user.name,
             email: user.email,
-            orderArray: cart
+            orderArray: cart,
+            status: 'waiting_confirmation',
+            user: req.session.userId
         });
         await order
             .save()

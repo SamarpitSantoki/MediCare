@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    {{>Aheader}}
+</head>
+
+<body>
+    {{>Anav}}
+
+    <h2 class="page-title">Orders</h2>
+    <a href="#" class="btn btn-primary">Manage Orders</a>
+    <br><br>
+
+    {{#if ocount}}
+    <table class="table table-striped text-center w-80">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>ProductList</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders as |order|}}
+            <tr>
+                <td>{{order._id}}</td>
+                <td>{{order.name}}</td>
+                <td>{{order.email}}</td>
+                <td>
+                    {{#each order.orderArray as |or|}}
+                    {{or}},<br />
+                    {{/each}}
+                </td>
+                <td>{{order.date}}</td>
+                <td>{{order.status}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <h3 class="text-center">No Orders</h3>
+    {{/if}}
+</body>
+
+</html>
