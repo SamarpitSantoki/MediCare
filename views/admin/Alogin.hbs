@@ -1,0 +1,36 @@
+<html>
+    <head>
+        {{!-- headers --}}
+        {{>Aheader}}
+    </head>
+    <body>
+        {{!-- navbars --}}
+    {{>Anav}}
+
+    <div class="container mx-auto my-4 p-1" >
+	    <section class="vh-100 my-auto" style="background-color: #000000; border-radius: 1rem;">
+	    	  <div class="row d-flex justify-content-center align-items-center h-100">
+	    		<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+	    		  <div class="card my-auto h-auto" style="border-radius: 1rem;">
+	    			<div class="card-body my-auto p-auto text-center">
+	    			  <h3 class="mb-5">Welcome Admin</h3>
+	    			  <form action="/admin/login" method='post'>
+                <div class="form-outline mb-4 shadow-2 border" style=" border-radius: 1rem;">
+                  <input type="name" name='name' required id="name" class="form-control form-control-lg" />
+                  <label class="form-label" for="Name">Name</label>
+                </div>            
+                <div class="form-outline mb-4 shadow-2 border" style=" border-radius: 1rem;">
+                  <input type="password" name='password' required id="Password" class="form-control form-control-lg" />
+                  <label class="form-label" for="Password">Password</label>
+                </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+              </form>
+	    			</div>
+	    		  </div>
+	    		</div>
+	    	  </div>
+	    	
+	    </section>
+    </div>
+    </body>
+</html>

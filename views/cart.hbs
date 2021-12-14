@@ -165,7 +165,7 @@
                 <img src="{{prod.image}}" alt="Avatar">
                 <div class="dablu  d-flex flex-column justify-content-center">
                     <h4><b>{{prod.title}}</b></h4>
-                    <p><b>Price: {{prod.price}}</b></p>
+                    <p><b>Price: ₹{{prod.price}}</b></p>
                     <div class="d-flex justify-content-between">
                         <div class="label center">
                             <label for="quantity"><b>{{prod.qty}}</b></label>
@@ -176,7 +176,7 @@
                             <a  href="/cart/update/{{prod.title}}?action=clear">clear</a>&nbsp;
                         </div>
                         <div>
-                           <b><i>SubTotal: {{prod.total}}</i></b>
+                           <b><i>SubTotal: ₹prod.total}}</i></b>
                         </div>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                 Oops! you haven't added anything to your cart yet.
             </div>
             {{/if}}
-            <p><b><i>Total : {{total}}</i></b></p>
+            <p><b><i>Total : ₹{{total}}</i></b></p>
             <a href="/cart/order" class="btn btn-custom ">Confirm Order</a>
         </div>
     </div>

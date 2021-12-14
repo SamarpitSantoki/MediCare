@@ -6,7 +6,8 @@
 
 <body>
     {{>Anav}}
-
+    <div class="container mx-auto my-2">
+        
     <h2 class="page-title">Orders</h2>
     <a href="#" class="btn btn-primary">Manage Orders</a>
     <br><br>
@@ -31,7 +32,7 @@
                 <td>{{order.email}}</td>
                 <td>
                     {{#each order.orderArray as |or|}}
-                    {{or}},<br />
+                    {{or.title}},<br />
                     {{/each}}
                 </td>
                 <td>{{order.date}}</td>
@@ -43,6 +44,7 @@
     {{else}}
     <h3 class="text-center">No Orders</h3>
     {{/if}}
+    </div>
 </body>
 
 </html>

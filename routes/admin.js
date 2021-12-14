@@ -24,7 +24,7 @@ router.use(session({
 
 const redirectLogin = (req,res,next) => {
     if (!req.session.userId){
-        res.redirect('/login')
+        res.redirect('/admin/login')
     }else{
         next()
     }
@@ -38,9 +38,22 @@ const redirectHome = (req,res,next) => {
     }
 }
 
-router.get('/', require('./admin/order'));
+router.get('/', redirectLogin , require('./admin/order'));
 
-router.use('/category', require('./admin/category'));
+router.get('/login', (req,res)=>{
+    res.render('./admin/Alogin');
+});
 
-router.use('/product', require('./admin/product'))
+router.post('/login', (req,res)=>{
+
+    const {name, password} = req.body;
+    console.log(name,password);
+    if(name==="admin" && password==="admin"){
+        req.session.userId = 11111;
+        return res.redirect('/admin/');
+    }
+});
+router.use('/category',redirectLogin, require('./admin/category'));
+
+router.use('/product',redirectLogin, require('./admin/product'))
 module.exports = router;

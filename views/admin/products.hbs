@@ -7,13 +7,14 @@
 <body>
     {{>Anav}}
 
-    <h2 class="page-title">Products</h2>
+    <div class="container mx-auto my-2">
+        <h2 class="page-title">Products</h2>
     <a href="/admin/product/add" class="btn btn-primary">Add a new Product</a>
     <br><br>
 
     {{#if pcount}}
-    <table class="table table-striped text-center w-80">
-        <thead>
+    <table class="table table-striped text-center w-80 align-middle">
+        <thead class="align-middle">
             <tr>
                 <th>Product</th>
                 <th>Price</th>
@@ -26,20 +27,20 @@
         <tbody>
             {{#each prods as |prod|}}
             <tr>
-                <td>{{prod.title}}</td>
-                <td>{{ prod.price }}</td>
-                <td>{{prod.category}}</td>
+                <td class="text-bold fs-4">{{prod.title}}</td>
+                <td class="fs-5">₹{{ prod.price }}</td>
+                <td class="fs-5 text-capitalize">{{prod.category}}</td>
                 <td>
                     {{!-- {{#if prod.image}} --}}
                     {{!-- <img src="/images/noimage.png"> --}}
                     {{!-- {{else}} --}}
-                    <img src="/product_images/{{prod._id}}/{{prod.image}}" style="height: 100px; width:100px;" alt="">
+                    <img src="/product_images/{{prod._id}}/{{prod.image}}" style="height: 100px; width:100px;" alt="{{prod.slug}} image">
                     {{!-- <img src="/product_images/{{prod._id}}/{{prod.image}}"> --}}
                     {{!-- {{/if}} --}}
 
                 </td>
-                <td><a href="/admin/product/edit/{{prod._id}}">Edit</a></td>
-                <td><a class="link-danger" href="/admin/product/delete/{{prod._id}}">Delete</a></td>
+                <td><a class="btn btn-secondary" href="/admin/product/edit/{{prod._id}}">Edit</a></td>
+                <td><a class="btn btn-danger" href="/admin/product/delete/{{prod._id}}">Delete</a></td>
             </tr>
             {{/each}}
         </tbody>
@@ -47,6 +48,11 @@
     {{else}}
     <h3 class="text-center">No Products</h3>
     {{/if}}
+    </div>
 </body>
-
+<script>
+    const aLink = ()=>{
+        
+    }
+</script>
 </html>

@@ -7,12 +7,13 @@
 <body>
     {{>Anav}}
 
+    <div class="container mx-auto my-2">
     <h2 class="page-title">Category</h2>
     <a href="/admin/category/add" class="btn btn-primary">Add a new Category</a>
     <br><br>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped text-center w-80 align-middle">
+        <thead class="align-middle">
             <tr>
                 <th>Category</th>
                 <th>Edit</th>
@@ -22,13 +23,14 @@
         <tbody>
             {{#each cats as |cat|}}
             <tr>
-                <td>{{cat.title}}</td>
-                <td><a href="/admin/category/edit/{{cat._id}}">Edit</a></td>
-                <td><a class="link-danger" href="/admin/category/delete/{{cat._id}}">Delete</a></td>
+                <td class="fs-5">{{cat.title}}</td>
+                <td><a class="btn btn-secondary" href="/admin/category/edit/{{cat._id}}">Edit</a></td>
+                <td><a class="btn btn-danger" href="/admin/category/delete/{{cat._id}}">Delete</a></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
+    </div>
 </body>
 
 </html>

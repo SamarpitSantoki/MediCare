@@ -27,9 +27,14 @@ router.use(bodyParser.urlencoded({
 router.get('/', function (req, res) {
     const userId = req.session.userId;
     Product.find((err, products) => {
+        let arr = [];
+        let length = products.length;
+        for(let i=0; i<20; i++){
+            arr.push(products[Math.floor(Math.random()*length)]);
+        }
         res.render('home', {
             user: userId,
-            products: products
+            products: arr
         });
     });
 });

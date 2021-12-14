@@ -12,6 +12,8 @@ router.use(
     })
 );
 
+// make a page named order details and show items in that page pass orderArray as argument
+
 router.get("/", async (req, res) => {
     var ocount = await Order.count();
     if (!ocount) {

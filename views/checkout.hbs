@@ -26,19 +26,19 @@
                     <tr>
                         <td><img src="{{prod.image}}" alt=""></td>
                         <td>{{prod.title}}</td>
-                        <td>{{prod.price}}</td>
+                        <td>₹{{prod.price}}</td>
                         <td>{{prod.qty}}</td>
                         <td>
                             <a href="/cart/update/{{prod.title}}?action=add">+</a>&nbsp;
                             <a href="/cart/update/{{prod.title}}?action=remove">-</a>&nbsp;
                             <a href="/cart/update/{{prod.title}}?action=clear">clear</a>&nbsp;
                         </td>
-                        <td>${{prod.total}}</td>
+                        <td>₹{{prod.total}}</td>
                     </tr>
                     {{/each}}
 
                     <tr>
-                        <td colspan="6" align="right"><b>Total</b>{{total}}</td>
+                        <td colspan="6" align="right"><b>Total ₹</b>{{total}}</td>
                     </tr>
                     <tr>
                         <td colspan="6" align="right">
